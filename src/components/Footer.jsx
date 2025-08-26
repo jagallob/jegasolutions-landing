@@ -1,0 +1,150 @@
+import { motion } from "framer-motion";
+import {
+  ArrowUp,
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Twitter,
+  Github,
+} from "lucide-react";
+
+const footerLinks = {
+  productos: [
+    { name: "Gestión de Horas Extra", href: "#" },
+    { name: "Reportes con IA", href: "#" },
+    { name: "Calculadora de Precios", href: "#" },
+  ],
+  servicios: [
+    { name: "Consultoría Tecnológica", href: "#" },
+    { name: "Implementación", href: "#" },
+    { name: "Soporte Técnico", href: "#" },
+  ],
+  empresa: [
+    { name: "Sobre Nosotros", href: "#" },
+    { name: "Carreras", href: "#" },
+    { name: "Blog", href: "#" },
+  ],
+};
+
+const socialLinks = [
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Github, href: "#", label: "GitHub" },
+];
+
+const Footer = ({ onScrollToTop }) => {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="bg-black text-gray-400 relative section-padding">
+      <motion.button
+        onClick={onScrollToTop}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1 }}
+        className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-jega-gold-400 hover:bg-jega-gold-500 text-gray-900 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
+        aria-label="Volver al inicio"
+      >
+        <ArrowUp className="w-5 h-5" />
+      </motion.button>
+
+      <div className="container-max">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="lg:col-span-1">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="flex items-center space-x-3 mb-6"
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-jega-gold-400 to-jega-gold-500 rounded-xl flex items-center justify-center">
+                <img
+                  src="/logo.png"
+                  alt="JEGASolutions Logo"
+                  className="w-7 h-7 object-contain"
+                />
+              </div>
+              <span className="text-2xl font-bold text-white">
+                JEGASolutions
+              </span>
+            </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-gray-400 mb-6 max-w-md leading-relaxed"
+            >
+              Transformamos procesos administrativos a través de tecnología
+              innovadora y consultoría especializada.
+            </motion.p>
+          </div>
+
+          {Object.entries(footerLinks).map(([title, links], index) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <h4 className="text-white font-semibold mb-4 capitalize">
+                {title}
+              </h4>
+              <ul className="space-y-2">
+                {links.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-sm hover:text-jega-gold-400 transition-colors duration-300 hover:translate-x-1 inline-block"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="border-t border-gray-800 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              viewport={{ once: true }}
+              className="text-sm text-gray-500 text-center md:text-left"
+            >
+              © {year} JEGASolutions. Todos los derechos reservados.{" "}
+              <span className="text-jega-gold-400 ml-2">
+                Soluciones que nacen del corazón.
+              </span>
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
+              className="flex items-center space-x-4"
+            >
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="w-8 h-8 bg-gray-800 hover:bg-jega-gold-400 rounded-lg flex items-center justify-center transition-all duration-300 group hover:scale-110"
+                >
+                  <link.icon className="w-4 h-4 text-gray-400 group-hover:text-gray-900 transition-colors" />
+                </a>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
