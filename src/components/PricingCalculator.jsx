@@ -40,44 +40,12 @@ const PricingCalculator = () => {
     }
   }, [employeeCount, customEmployeeCount, companySize]);
 
-  // Costos de infraestructura mensual (basado en cotización real Render + Vercel)
-  const infraCosts = {
-    saas: {
-      // Costo por empresa: Render Web Service ($25) + PostgreSQL ($7 + $1.50 storage) + Vercel prorrateado ($4)
-      micro: 37.5, // Mismo costo base de infraestructura que PYME
-      small: 37.5, // $37.50/mes por empresa
-      medium: 45.0, // Más recursos para empresas medianas
-      large: 65.0, // Recursos premium para grandes empresas
-    },
-  };
-
-  // Precios base transparentes (ahora incluyen margen sobre infraestructura)
   const basePricing = {
     saas: {
-      micro: {
-        base: 39,
-        perEmployee: 2.0,
-        max: 59,
-        infraCost: infraCosts.saas.micro,
-      },
-      small: {
-        base: 79,
-        perEmployee: 1.5,
-        max: 149,
-        infraCost: infraCosts.saas.small,
-      },
-      medium: {
-        base: 199,
-        perEmployee: 1.0,
-        max: 349,
-        infraCost: infraCosts.saas.medium,
-      },
-      large: {
-        base: 499,
-        perEmployee: 0.8,
-        max: 1999,
-        infraCost: infraCosts.saas.large,
-      },
+      micro: { min: 97, max: 139 },
+      small: { min: 157, max: 189 },
+      medium: { min: 199, max: 349 },
+      large: { min: 499, max: 1999 },
     },
     onpremise: {
       micro: { license: 5000, maintenance: 0.2, implementation: 2000 },
@@ -117,6 +85,7 @@ const PricingCalculator = () => {
 
     const sizeForPricing = getCompanySizeForEmployees(actualEmployeeCount);
     const pricing = basePricing[deploymentType][sizeForPricing];
+    const sizeInfo = companySizes[sizeForPricing];
 
     // Calcular multiplicador por módulos seleccionados
     let moduleMultiplier = 0;
@@ -126,13 +95,24 @@ const PricingCalculator = () => {
       moduleMultiplier += moduleMultipliers.reports[deploymentType];
 
     if (deploymentType === "saas") {
-      const basePrice = pricing.base * moduleMultiplier;
-      const employeePrice =
-        actualEmployeeCount * pricing.perEmployee * moduleMultiplier;
-      const monthlyPrice = Math.min(
-        basePrice + employeePrice,
-        pricing.max * moduleMultiplier
-      );
+      const [minEmployees, maxEmployees] = sizeInfo.range;
+      let monthlyPrice;
+
+      if (actualEmployeeCount <= minEmployees) {
+        monthlyPrice = pricing.min;
+      } else if (
+        actualEmployeeCount >= maxEmployees &&
+        sizeForPricing !== "large"
+      ) {
+        monthlyPrice = pricing.max;
+      } else {
+        const progress =
+          (actualEmployeeCount - minEmployees) / (maxEmployees - minEmployees);
+        monthlyPrice = pricing.min + (pricing.max - pricing.min) * progress;
+      }
+
+      monthlyPrice *= moduleMultiplier;
+
       const annualPrice = monthlyPrice * 12 * 0.85; // 15% descuento anual
 
       return {
@@ -140,13 +120,6 @@ const PricingCalculator = () => {
         annual: Math.round(annualPrice),
         setup: 500,
         total3Years: Math.round(annualPrice * 3 + 500),
-        infraCost: pricing.infraCost,
-        grossMargin:
-          monthlyPrice > 0
-            ? Math.round(
-                ((monthlyPrice - pricing.infraCost) / monthlyPrice) * 100
-              )
-            : 0,
       };
     } else {
       const licensePrice = pricing.license * moduleMultiplier;
