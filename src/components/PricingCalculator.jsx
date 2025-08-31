@@ -164,13 +164,20 @@ const PricingCalculator = () => {
   };
 
   return (
-    <div className="section-with-header bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="section-with-header bg-gradient-to-br from-jega-blue-200 via-jega-blue-100 to-jega-indigo-950 relative overflow-hidden">
+      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 overflow-hidden -z-10">
+        <div className="absolute -top-1/2 -right-1/2 w-96 h-96 bg-jega-gold-400/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-1/2 -left-1/2 w-96 h-96 bg-jega-blue-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-jega-indigo-950/20 rounded-full blur-2xl animate-float"></div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-6xl border border-gray-100"
+        className="relative z-10 bg-white rounded-3xl shadow-2xl p-8 w-full max-w-6xl border border-gray-100"
       >
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">

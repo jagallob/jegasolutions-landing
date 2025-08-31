@@ -13,6 +13,16 @@ const ModuleCard = ({ module, index, isUpcoming = false }) => {
     return colors[color] || colors.blue;
   };
 
+  const getPriceCardClasses = (color) => {
+    const colorMap = {
+      blue: "bg-blue-50 border-blue-200",
+      purple: "bg-purple-50 border-purple-200",
+      green: "bg-green-50 border-green-200",
+      yellow: "bg-yellow-50 border-yellow-200",
+    };
+    return colors[color] || colors.blue;
+  };
+
   if (isUpcoming) {
     return (
       <motion.div
@@ -20,7 +30,7 @@ const ModuleCard = ({ module, index, isUpcoming = false }) => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: index * 0.1 }}
         viewport={{ once: true }}
-        className="bg-gradient-to-br from-jega-gold-50 to-yellow-100 rounded-2xl p-6 border border-jega-gold-200 hover:shadow-lg transition-all duration-300"
+        className="bg-gradient-to-br from-jega-gold-50 to-yellow-100 rounded-2xl p-8 border border-jega-gold-200 shadow-lg hover:shadow-xl transition-all duration-300"
       >
         <div className="w-12 h-12 bg-jega-gold-200 rounded-xl flex items-center justify-center mb-4">
           <module.icon className="w-6 h-6 text-jega-gold-600" />
@@ -44,7 +54,7 @@ const ModuleCard = ({ module, index, isUpcoming = false }) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: index * 0.2 }}
       viewport={{ once: true }}
-      className="card-module group"
+      className="bg-gradient-to-br from-white to-gray-100 rounded-2xl p-8 border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 group"
     >
       <div
         className={`w-16 h-16 bg-gradient-to-br ${getColorClasses(
@@ -67,7 +77,7 @@ const ModuleCard = ({ module, index, isUpcoming = false }) => {
       </ul>
 
       <div
-        className={`bg-${module.color}-50 rounded-xl p-4 border border-${module.color}-200`}
+        className={`rounded-xl p-4 border ${getPriceCardClasses(module.color)}`}
       >
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium text-gray-700">Precio</span>
@@ -81,5 +91,3 @@ const ModuleCard = ({ module, index, isUpcoming = false }) => {
 };
 
 export default ModuleCard;
-
-
