@@ -67,7 +67,7 @@ const getIconColor = (color) => {
 
 const Consulting = ({ onContactClick }) => {
   return (
-    <section className="section-with-header bg-amber-50">
+    <section className="section-with-header bg-gradient-to-br from-white to-blue-200">
       <div className="container-max">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -137,7 +137,7 @@ const Consulting = ({ onContactClick }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="text-center group bg-gray-50 p-4 rounded-xl border"
+                  className="text-center group bg-white/60 backdrop-blur-sm p-4 rounded-xl border border-gray-200/80 shadow-sm"
                 >
                   <div className="w-16 h-16 bg-gradient-to-br from-jega-blue-500 to-jega-indigo-800 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                     <span className="text-white font-bold text-lg">

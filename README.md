@@ -141,7 +141,7 @@ Cualquier hosting estático que soporte SPA routing.
 
 ### Hero Section
 
-- Logo de JEGASolutions integrado
+- logo de JEGASolutions integrado
 - Slogan "Soluciones que nacen del corazón"
 - Botones CTA para demo y contacto
 - Indicadores de confianza por sector

@@ -5,9 +5,32 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow: hidden;
+    height: 100%;
   }
   body {
     @apply bg-white text-gray-800 antialiased;
+    overflow: hidden;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Ocultar scrollbars en todos los navegadores */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* Firefox */
+  html,
+  body,
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 }
 
@@ -22,13 +45,23 @@
     @apply border-2 border-jega-blue-900 text-jega-blue-800 font-semibold rounded-xl px-6 py-2 transition-all duration-300 transform hover:bg-jega-blue-600 hover:text-white hover:scale-105;
   }
   .section-padding {
-    @apply flex h-full w-full items-center justify-center overflow-y-auto p-4 sm:p-6 lg:p-8;
+    @apply flex h-full w-full items-center justify-center overflow-hidden p-4 sm:p-6 lg:p-8;
   }
   .section-with-header {
-    @apply flex h-full w-full items-center justify-center overflow-y-auto p-4 pt-32 sm:p-6 sm:pt-32 lg:p-8 lg:pt-32;
+    @apply flex h-full w-full items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8;
+    /* Altura del header es h-32 = 8rem, añadimos padding superior */
+    padding-top: 8rem;
+    padding-bottom: 2rem;
+    /* Altura disponible menos el header */
+    min-height: calc(100vh - 8rem);
+    /* Centrado vertical del contenido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .container-max {
     @apply max-w-7xl mx-auto w-full;
+    /* Removemos h-full para permitir que el contenido determine la altura */
   }
   .gradient-text {
     @apply bg-gradient-to-r from-jega-blue-600 to-jega-indigo-800 bg-clip-text text-transparent;

@@ -11,7 +11,7 @@ const Header = ({ activeSection, scrollToSection }) => {
     >
       <div className="container-max h-full">
         <div className="flex justify-between items-center h-full py-2">
-          {/* Izquierda: Logo */}
+          {/* Izquierda: logo */}
           <div className="flex-1 flex justify-start">
             <div
               className="cursor-pointer h-full flex items-center"
@@ -19,14 +19,14 @@ const Header = ({ activeSection, scrollToSection }) => {
             >
               <img
                 src="/logo5.png"
-                alt="JEGASolutions Logo"
-                className="h-44 -ml-8 object-contain drop-shadow-2xl lg:h-[34rem] lg:-ml-60"
+                alt="JEGASolutions logo"
+                className="h-20 object-contain drop-shadow-2xl lg:h-24 -ml-16"
               />
             </div>
           </div>
 
           {/* Centro: Navegación */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
             <button
               onClick={() => scrollToSection(1)}
               className={`text-lg text-gray-700 hover:text-jega-blue-900 transition-colors font-medium ${
@@ -54,7 +54,7 @@ const Header = ({ activeSection, scrollToSection }) => {
           </div>
 
           {/* Derecha: Botón CTA */}
-          <div className="flex-1 flex justify-end">
+          <div className="flex-1 flex justify-end mr-16">
             <button
               onClick={() => scrollToSection(3)}
               className="btn-primary px-6 py-2 text-base"
