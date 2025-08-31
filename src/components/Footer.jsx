@@ -75,7 +75,7 @@ const Footer = ({ onScrollToTop }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="text-gray-400 mb-6 max-w-md leading-relaxed"
+              className="text-base text-gray-400 mb-6 max-w-md leading-relaxed"
             >
               Transformamos procesos administrativos a través de tecnología
               innovadora y consultoría especializada.
@@ -90,7 +90,7 @@ const Footer = ({ onScrollToTop }) => {
               transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-white font-semibold mb-4 capitalize">
+              <h4 className="text-base text-white font-bold mb-4 capitalize">
                 {title}
               </h4>
               <ul className="space-y-2">
@@ -98,7 +98,7 @@ const Footer = ({ onScrollToTop }) => {
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-sm hover:text-jega-gold-400 transition-colors duration-300 hover:translate-x-1 inline-block"
+                      className="text-base text-gray-400 hover:text-jega-gold-400 transition-colors duration-300 hover:translate-x-1 inline-block"
                     >
                       {link.name}
                     </a>
@@ -116,7 +116,7 @@ const Footer = ({ onScrollToTop }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
               viewport={{ once: true }}
-              className="text-sm text-gray-500 text-center md:text-left"
+              className="text-base text-gray-500 text-center md:text-left"
             >
               © {year} JEGASolutions. Todos los derechos reservados.{" "}
               <span className="text-jega-gold-400 ml-2">
