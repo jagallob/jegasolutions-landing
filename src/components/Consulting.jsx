@@ -32,21 +32,6 @@ const services = [
   },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "JEGASolutions transformó completamente nuestros procesos administrativos. La eficiencia aumentó un 40%.",
-    author: "María González",
-    position: "Directora de Operaciones, Industrias del Valle",
-  },
-  {
-    quote:
-      "La consultoría fue clave para entender cómo digitalizar sin perder la esencia de nuestra empresa.",
-    author: "Carlos Mendoza",
-    position: "Gerente General, Logística Express",
-  },
-];
-
 const processSteps = [
   {
     step: "01",
@@ -80,9 +65,9 @@ const getIconColor = (color) => {
   return colors[color] || colors.blue;
 };
 
-const Consulting = () => {
+const Consulting = ({ onContactClick }) => {
   return (
-    <section className="section-padding bg-white">
+    <section className="section-with-header bg-amber-50">
       <div className="container-max">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -127,7 +112,7 @@ const Consulting = () => {
                 </motion.div>
               ))}
             </div>
-            <button className="btn-outline group">
+            <button className="btn-outline group" onClick={onContactClick}>
               <span className="flex items-center">
                 Agenda una consulta gratuita
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -140,66 +125,34 @@ const Consulting = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="space-y-6"
           >
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="bg-gray-50 rounded-xl p-6 border-l-4 border-jega-gold-400"
-              >
-                <p className="text-gray-700 text-md italic mb-4">
-                  "{testimonial.quote}"
-                </p>
-                <div className="text-right">
-                  <div className="text-sm font-bold text-gray-900">
-                    {testimonial.author}
+            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center lg:text-left">
+              Nuestro Proceso de Consultoría
+            </h3>
+            <div className="grid grid-cols-2 gap-6">
+              {processSteps.map((item, index) => (
+                <motion.div
+                  key={item.step}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-center group bg-gray-50 p-4 rounded-xl border"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-jega-blue-500 to-jega-indigo-800 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-white font-bold text-lg">
+                      {item.step}
+                    </span>
                   </div>
-                  <div className="text-xs text-gray-600">
-                    {testimonial.position}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-600 text-sm">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-20 text-center"
-        >
-          <h3 className="text-3xl font-bold text-gray-900 mb-12">
-            Nuestro Proceso de Consultoría
-          </h3>
-          <div className="grid md:grid-cols-4 gap-8">
-            {processSteps.map((item, index) => (
-              <motion.div
-                key={item.step}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center group"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-jega-blue-500 to-jega-indigo-800 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-white font-bold text-lg">
-                    {item.step}
-                  </span>
-                </div>
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">
-                  {item.title}
-                </h4>
-                <p className="text-gray-600 text-sm">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import {
   Users,
   Building2,
   Clock,
+  Cpu,
   FileText,
   Check,
   X,
@@ -163,199 +164,173 @@ const PricingCalculator = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-12 bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="section-with-header bg-gradient-to-br from-blue-50 to-indigo-100">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-center mb-12"
+        className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-6xl border border-gray-100"
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Calcula tu <span className="gradient-text">Inversión</span>
-        </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Obtén una cotización personalizada en tiempo real. Elige entre
-          nuestros modelos SaaS o On-Premise según las necesidades de tu
-          empresa.
-        </p>
-      </motion.div>
-      <div className="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-6xl border border-gray-100">
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="text-center mb-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Calcula tu <span className="gradient-text">Inversión</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Obtén una cotización personalizada en tiempo real.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-8 items-start">
           {/* Configuración */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Fila 1: Tipo de Despliegue y Tamaño de Empresa */}
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <Building2 className="w-5 h-5 text-jega-blue-600" />
-                  Tipo de Despliegue
-                </h3>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    onClick={() => setDeploymentType("saas")}
-                    className={`p-4 rounded-xl border-2 transition-all duration-300 text-center ${
-                      deploymentType === "saas"
-                        ? "border-jega-blue-600 bg-jega-blue-50 text-jega-blue-700 shadow-lg"
-                        : "border-gray-200 hover:border-jega-blue-300 hover:bg-jega-blue-50/50"
-                    }`}
-                  >
-                    <h4 className="font-semibold">SaaS (Nube)</h4>
-                    <p className="text-xs text-gray-500 mt-1">Pago mensual</p>
-                  </button>
-                  <button
-                    onClick={() => setDeploymentType("onpremise")}
-                    className={`p-4 rounded-xl border-2 transition-all duration-300 text-center ${
-                      deploymentType === "onpremise"
-                        ? "border-jega-blue-600 bg-jega-blue-50 text-jega-blue-700 shadow-lg"
-                        : "border-gray-200 hover:border-jega-blue-300 hover:bg-jega-blue-50/50"
-                    }`}
-                  >
-                    <h4 className="font-semibold">On-Premise</h4>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Licencia perpetua
-                    </p>
-                  </button>
-                </div>
+          <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
+            {/* Deployment Type */}
+            <div className="bg-gray-50 rounded-xl p-4">
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-gray-800">
+                <Building2 className="w-5 h-5 text-jega-blue-600" />
+                Despliegue
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => setDeploymentType("saas")}
+                  className={`p-3 rounded-lg border text-center text-sm transition-all ${
+                    deploymentType === "saas"
+                      ? "border-jega-blue-500 bg-jega-blue-50 text-jega-blue-700 font-semibold"
+                      : "border-gray-200 hover:border-jega-blue-300"
+                  }`}
+                >
+                  SaaS (Nube)
+                </button>
+                <button
+                  onClick={() => setDeploymentType("onpremise")}
+                  className={`p-3 rounded-lg border text-center text-sm transition-all ${
+                    deploymentType === "onpremise"
+                      ? "border-jega-blue-500 bg-jega-blue-50 text-jega-blue-700 font-semibold"
+                      : "border-gray-200 hover:border-jega-blue-300"
+                  }`}
+                >
+                  On-Premise
+                </button>
               </div>
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-jega-blue-600" />
-                  Tamaño de Empresa
-                </h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {Object.entries(companySizes).map(([size, info]) => (
-                    <button
-                      key={size}
-                      onClick={() => handleCompanySizeChange(size)}
-                      className={`p-3 rounded-lg border-2 text-center transition-all ${
-                        companySize === size
-                          ? "border-blue-500 bg-blue-50 text-blue-700 shadow-sm"
-                          : "border-gray-200 hover:border-gray-300"
+            </div>
+
+            {/* Company Size */}
+            <div className="bg-gray-50 rounded-xl p-4">
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-gray-800">
+                <Users className="w-5 h-5 text-jega-blue-600" />
+                Tamaño
+              </h3>
+              <select
+                value={companySize}
+                onChange={(e) => handleCompanySizeChange(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white"
+              >
+                {Object.entries(companySizes).map(([size, info]) => (
+                  <option key={size} value={size}>
+                    {info.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Modules */}
+            <div className="bg-gray-50 rounded-xl p-4">
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-gray-800">
+                <Cpu className="w-5 h-5 text-jega-blue-600" />
+                Módulos
+              </h3>
+              <div className="space-y-2">
+                <div
+                  className={`p-2 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedModules.extraHours
+                      ? "border-green-500 bg-green-50"
+                      : "border-gray-200"
+                  }`}
+                  onClick={() => handleModuleChange("extraHours")}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                        selectedModules.extraHours
+                          ? "bg-green-500 border-green-500"
+                          : "border-gray-300"
                       }`}
                     >
-                      <div className="font-semibold text-sm">
-                        {info.label.split(" ")[0]}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        {info.label.split(" ").slice(1).join(" ")}
-                      </div>
-                    </button>
-                  ))}
+                      {selectedModules.extraHours && (
+                        <Check className="w-3 h-3 text-white" />
+                      )}
+                    </div>
+                    <span className="font-semibold text-sm">
+                      Gestión de Horas Extra
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className={`p-2 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedModules.reports
+                      ? "border-green-500 bg-green-50"
+                      : "border-gray-200"
+                  }`}
+                  onClick={() => handleModuleChange("reports")}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                        selectedModules.reports
+                          ? "bg-green-500 border-green-500"
+                          : "border-gray-300"
+                      }`}
+                    >
+                      {selectedModules.reports && (
+                        <Check className="w-3 h-3 text-white" />
+                      )}
+                    </div>
+                    <span className="font-semibold text-sm">
+                      Reportes con IA
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Fila 2: Módulos y Número de Empleados */}
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-xl font-semibold mb-4">
-                  Módulos Disponibles
-                </h3>
-                <div className="space-y-3">
-                  <div
-                    className={`p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                      selectedModules.extraHours
-                        ? "border-green-500 bg-green-50"
-                        : "border-gray-200"
-                    }`}
-                    onClick={() => handleModuleChange("extraHours")}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
-                          selectedModules.extraHours
-                            ? "bg-green-500 border-green-500"
-                            : "border-gray-300"
-                        }`}
-                      >
-                        {selectedModules.extraHours && (
-                          <Check className="w-3 h-3 text-white" />
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-sm">
-                          Gestión de Horas Extra
-                        </h4>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    className={`p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                      selectedModules.reports
-                        ? "border-green-500 bg-green-50"
-                        : "border-gray-200"
-                    }`}
-                    onClick={() => handleModuleChange("reports")}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
-                          selectedModules.reports
-                            ? "bg-green-500 border-green-500"
-                            : "border-gray-300"
-                        }`}
-                      >
-                        {selectedModules.reports && (
-                          <Check className="w-3 h-3 text-white" />
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-sm">
-                          Reportes con IA
-                        </h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-xl font-semibold mb-4">
-                  Número de Empleados
-                </h3>
-                <div className="space-y-3">
-                  <div className="grid grid-cols-4 gap-2">
-                    {[50, 100, 200, 500].map((count) => (
-                      <button
-                        key={count}
-                        onClick={() => handleEmployeeCountChange(count)}
-                        className={`p-2 rounded-lg border transition-all text-sm ${
-                          employeeCount === count && !customEmployeeCount
-                            ? "border-blue-500 bg-blue-50 text-blue-700"
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                      >
-                        {count}
-                      </button>
-                    ))}
-                  </div>
-                  <div>
-                    <input
-                      type="number"
-                      placeholder="O cantidad personalizada"
-                      value={customEmployeeCount}
-                      onChange={(e) => setCustomEmployeeCount(e.target.value)}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                    />
-                  </div>
-                </div>
+            {/* Employee Count */}
+            <div className="bg-gray-50 rounded-xl p-4">
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-gray-800">
+                <Calculator className="w-5 h-5 text-jega-blue-600" />
+                Empleados
+              </h3>
+              <div className="space-y-3">
+                <input
+                  type="range"
+                  min="1"
+                  max="500"
+                  value={customEmployeeCount || employeeCount}
+                  onChange={(e) => handleEmployeeCountChange(e.target.value)}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                />
+                <input
+                  type="number"
+                  placeholder="O cantidad personalizada"
+                  value={customEmployeeCount || employeeCount}
+                  onChange={(e) => setCustomEmployeeCount(e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                />
               </div>
             </div>
           </div>
 
           {/* Resultados */}
-          <div className="space-y-6">
-            {/* Cotización */}
-            <div className="bg-gradient-to-br from-jega-blue-50 via-jega-indigo-50 to-jega-blue-100 p-8 rounded-2xl border border-jega-blue-200">
-              <h3 className="text-2xl font-bold mb-4 text-jega-blue-900">
-                📋 Cotización Estimada
+          <div className="lg:col-span-1">
+            <div className="bg-gradient-to-br from-jega-blue-50 via-jega-indigo-50 to-jega-blue-100 p-6 rounded-2xl border border-jega-blue-200 h-full flex flex-col">
+              <h3 className="text-2xl font-bold mb-4 text-jega-blue-900 flex items-center gap-2">
+                <Calculator className="w-6 h-6" />
+                Cotización
               </h3>
 
               {Object.values(selectedModules).some(Boolean) ? (
-                <div className="space-y-4">
-                  <div className="bg-white/50 rounded-lg p-4">
-                    <div className="text-sm text-gray-600 mb-4">
+                <div className="space-y-4 flex-grow flex flex-col">
+                  <div className="bg-white/60 rounded-lg p-4 flex-grow">
+                    <div className="text-sm text-gray-600 mb-2">
                       {companySizes[companySize].label} (
                       {customEmployeeCount
                         ? parseInt(customEmployeeCount)
@@ -419,8 +394,8 @@ const PricingCalculator = () => {
                   </div>
 
                   {/* Incluye */}
-                  <div className="bg-blue-100/50 rounded-lg p-4 border border-blue-200">
-                    <h4 className="font-semibold text-blue-800 mb-2">
+                  <div className="bg-blue-100/50 rounded-lg p-3 border border-blue-200">
+                    <h4 className="font-semibold text-blue-800 mb-2 text-sm">
                       ✅ Incluye
                     </h4>
                     <div className="text-xs text-blue-700 grid grid-cols-2 gap-1">
@@ -430,7 +405,6 @@ const PricingCalculator = () => {
                           <span>• Actualizaciones</span>
                           <span>• Soporte técnico</span>
                           <span>• Backups automáticos</span>
-                          <span>• SSL y seguridad</span>
                         </>
                       ) : (
                         <>
@@ -438,15 +412,14 @@ const PricingCalculator = () => {
                           <span>• Instalación Docker</span>
                           <span>• Capacitación inicial</span>
                           <span>• Soporte implementación</span>
-                          <span>• Documentación</span>
                         </>
                       )}
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="text-center py-8">
-                  <div className="text-6xl mb-4">🎯</div>
+                <div className="text-center py-8 flex-grow flex flex-col justify-center items-center">
+                  <div className="text-5xl mb-4">🎯</div>
                   <p className="text-gray-600">
                     Selecciona al menos un módulo para ver la cotización
                   </p>
@@ -455,7 +428,7 @@ const PricingCalculator = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
