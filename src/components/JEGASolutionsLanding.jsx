@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import Header from "./Header";
 import Hero from "./Hero";
-import ModulesSection from "./Modules/ModulesSection";
+import ModulesSection from "./modules/ModulesSection";
 import Consulting from "./Consulting";
 import PricingCalculator from "./PricingCalculator";
 import Contact from "./Contact";
