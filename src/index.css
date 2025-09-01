@@ -6,17 +6,15 @@
   html {
     scroll-behavior: smooth;
     --header-height: 6rem; /* 96px */
-    /* Permitir scroll vertical en móvil, ocultarlo en escritorio */
-    overflow-y: auto;
-    @apply sm:overflow-hidden;
-    height: 100%;
   }
   body {
-    @apply bg-white text-gray-800 antialiased;
+    @apply bg-gray-50 text-gray-800 antialiased;
+    /* Mobile: allow vertical scroll and content to determine height */
     overflow-y: auto;
-    @apply sm:overflow-hidden;
-    min-height: 100vh; /* Asegura que el body ocupe al menos toda la pantalla */
-    @apply sm:h-screen; /* Vuelve a la altura fija en escritorio */
+    min-height: 100vh;
+
+    /* Desktop: lock to screen height and hide vertical scroll for horizontal layout */
+    @apply sm:h-screen sm:overflow-hidden;
     margin: 0;
     padding: 0;
   }
