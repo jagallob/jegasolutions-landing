@@ -6,7 +6,7 @@ import UpcomingModules from "./UpcomingModules";
 
 const ModulesSection = () => {
   return (
-    <section className="section-with-header bg-gradient-to-br from-blue-50 to-indigo-100">
+    <section className="section-with-header bg-gradient-to-br from-gray-50 to-blue-100">
       <div className="container-max grid lg:grid-cols-5 gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, x: -30 }}

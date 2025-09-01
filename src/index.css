@@ -5,13 +5,18 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow: hidden;
+    --header-height: 6rem; /* 96px */
+    /* Permitir scroll vertical en móvil, ocultarlo en escritorio */
+    overflow-y: auto;
+    @apply sm:overflow-hidden;
     height: 100%;
   }
   body {
     @apply bg-white text-gray-800 antialiased;
-    overflow: hidden;
-    height: 100vh;
+    overflow-y: auto;
+    @apply sm:overflow-hidden;
+    min-height: 100vh; /* Asegura que el body ocupe al menos toda la pantalla */
+    @apply sm:h-screen; /* Vuelve a la altura fija en escritorio */
     margin: 0;
     padding: 0;
   }
@@ -36,13 +41,13 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-jega-gold-400 text-gray-900 font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:bg-jega-gold-500 hover:scale-105 hover:shadow-xl;
+    @apply bg-jega-gold-400 text-gray-900 font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:bg-jega-gold-500 hover:scale-105 hover:shadow-xl active:scale-95;
   }
   .btn-secondary {
-    @apply bg-white/20 text-white font-semibold rounded-xl backdrop-blur-sm border border-white/30 transition-all duration-300 transform hover:bg-white/30 hover:scale-105;
+    @apply bg-white/20 text-white font-semibold rounded-xl backdrop-blur-sm border border-white/30 transition-all duration-300 transform hover:bg-white/30 hover:scale-105 active:scale-95;
   }
   .btn-outline {
-    @apply border-2 border-jega-blue-900 text-jega-blue-800 font-semibold rounded-xl px-6 py-2 transition-all duration-300 transform hover:bg-jega-blue-600 hover:text-white hover:scale-105;
+    @apply border-2 border-jega-blue-900 text-jega-blue-800 font-semibold rounded-xl px-6 py-2 transition-all duration-300 transform hover:bg-jega-blue-600 hover:text-white hover:scale-105 active:scale-95;
   }
   .section-padding {
     @apply flex h-full w-full items-center justify-center overflow-hidden p-4 sm:p-6 lg:p-8;
@@ -50,12 +55,12 @@
   .section-with-header {
     @apply flex h-full w-full items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8;
     /* Altura del header es h-32 = 8rem, añadimos padding superior */
-    padding-top: 8rem;
+    padding-top: var(--header-height);
     padding-bottom: 2rem;
     /* Altura disponible menos el header */
-    min-height: calc(100vh - 8rem);
+    min-height: calc(100vh - var(--header-height));
     /* Centrado vertical del contenido */
-    display: flex;
+    /* display: flex; ya está incluido en @apply */
     align-items: center;
     justify-content: center;
   }

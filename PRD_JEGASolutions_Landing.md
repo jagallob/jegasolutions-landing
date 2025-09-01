@@ -66,7 +66,7 @@ Diseñar e implementar una **landing page corporativa** para **JEGASolutions** q
 
 1. **Frontend en React + Vite + Tailwind CSS.**
 2. **Calculadora de precios integrada** (componente existente `JEGAPricingCalculator`).
-3. **Responsive design** (desktop horizontal, adaptativo a móvil en slider horizontal).
+3. **Responsive design** (desktop horizontal, adaptativo a móvil ).
 4. **CTA con tracking** (clics en “Solicita demo” y “Contáctanos” medidos con Google Analytics/GA4).
 5. **Animaciones suaves** tipo Framer Motion:
    - Fade-in en hero.
@@ -87,7 +87,7 @@ Diseñar e implementar una **landing page corporativa** para **JEGASolutions** q
 ## 6. Estilo y Lineamientos UI
 
 - **Colores base:**
-  - Azul/Índigo (#0d47a1 / #1e3a8a).
+  - Azul/Índigo (#030B1B / #f5cc00).
   - Dorado (#facc15) para acentos y botones CTA.
 - **Tipografía:** Sans-serif moderna (Inter, Poppins o similar).
 - **Diseño:**
