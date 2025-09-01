@@ -15,7 +15,7 @@ const Hero = ({ onContactClick, onDemoClick }) => {
           <img
             src="/logo5.png"
             alt="JEGASolutions Logo"
-            className="mx-auto h-32 w-auto md:h-40 lg:h-48"
+            className="mx-auto h-auto w-full max-w-[20rem] object-contain relative -translate-x-2 md:max-w-[24rem] lg:max-w-[28rem]"
           />
         </motion.div>
 
