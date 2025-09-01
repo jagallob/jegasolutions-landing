@@ -22,7 +22,7 @@ const Header = ({ activeSection, scrollToSection }) => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-lg z-50 h-24 shadow-md"
+        className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-lg z-50 h-18 shadow-md"
       >
         <div className="container-max h-full flex justify-between items-center px-4 sm:px-6 lg:px-8">
           {/* Izquierda: logo */}
@@ -33,7 +33,7 @@ const Header = ({ activeSection, scrollToSection }) => {
             <img
               src="/logo5.png"
               alt="JEGASolutions logo"
-              className="h-16 object-contain drop-shadow-lg lg:h-20"
+              className="h-12 object-contain drop-shadow-lg lg:h-14"
             />
           </div>
 
@@ -86,7 +86,7 @@ const Header = ({ activeSection, scrollToSection }) => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="fixed inset-0 top-24 z-40 bg-white/95 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 top-18 z-40 bg-white/95 backdrop-blur-sm lg:hidden"
         >
           <div className="flex flex-col items-center justify-center h-full space-y-8">
             {navItems.map((item) => (
