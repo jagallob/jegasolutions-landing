@@ -66,7 +66,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="section-padding bg-gray-900 text-white">
+    <section className="section-padding bg-gradient-to-br from-blue-900 to-gray-900 text-white">
       <div className="container-max">
         <div className="flex flex-col h-full">
           {/* Header */}

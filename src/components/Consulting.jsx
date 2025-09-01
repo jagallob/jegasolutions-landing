@@ -67,7 +67,7 @@ const getIconColor = (color) => {
 
 const Consulting = ({ onContactClick }) => {
   return (
-    <section className="section-with-header bg-gradient-to-br from-white to-blue-200">
+    <section className="section-with-header bg-gradient-to-br from-blue-100 to-blue-300">
       <div className="container-max">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div

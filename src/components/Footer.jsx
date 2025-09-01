@@ -37,18 +37,7 @@ const Footer = ({ onScrollToTop }) => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-gray-400 relative section-padding">
-      <motion.button
-        onClick={onScrollToTop}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-jega-gold-400 hover:bg-jega-gold-500 text-gray-900 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
-        aria-label="Volver al inicio"
-      >
-        <ArrowUp className="w-5 h-5" />
-      </motion.button>
-
+    <footer className="bg-gradient-to-b from-gray-900 to-black text-gray-400 relative section-padding">
       <div className="container-max">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div className="lg:col-span-1">

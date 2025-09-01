@@ -164,14 +164,7 @@ const PricingCalculator = () => {
   };
 
   return (
-    <div className="section-with-header bg-gradient-to-br from-jega-blue-200 via-jega-blue-100 to-jega-indigo-950 relative overflow-hidden">
-      <div className="absolute inset-0 bg-black/40"></div>
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        <div className="absolute -top-1/2 -right-1/2 w-96 h-96 bg-jega-gold-400/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-1/2 -left-1/2 w-96 h-96 bg-jega-blue-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-jega-indigo-950/20 rounded-full blur-2xl animate-float"></div>
-      </div>
-
+    <div className="section-with-header bg-gradient-to-br from-blue-400 to-blue-800">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -200,23 +193,33 @@ const PricingCalculator = () => {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => setDeploymentType("saas")}
-                  className={`p-3 rounded-lg border text-center text-sm transition-all ${
+                  className={`p-3 rounded-lg border text-center text-sm transition-all h-full ${
                     deploymentType === "saas"
                       ? "border-jega-blue-500 bg-jega-blue-50 text-jega-blue-700 font-semibold"
                       : "border-gray-200 hover:border-jega-blue-300"
                   }`}
                 >
-                  SaaS (Nube)
+                  <div>
+                    <div className="font-bold">SaaS (Nube)</div>
+                    <div className="text-xs text-gray-500 font-normal mt-1">
+                      Suscripción mensual/anual
+                    </div>
+                  </div>
                 </button>
                 <button
                   onClick={() => setDeploymentType("onpremise")}
-                  className={`p-3 rounded-lg border text-center text-sm transition-all ${
+                  className={`p-3 rounded-lg border text-center text-sm transition-all h-full ${
                     deploymentType === "onpremise"
                       ? "border-jega-blue-500 bg-jega-blue-50 text-jega-blue-700 font-semibold"
                       : "border-gray-200 hover:border-jega-blue-300"
                   }`}
                 >
-                  On-Premise
+                  <div>
+                    <div className="font-bold">On-Premise</div>
+                    <div className="text-xs text-gray-500 font-normal mt-1">
+                      Compra única a perpetuidad
+                    </div>
+                  </div>
                 </button>
               </div>
             </div>
