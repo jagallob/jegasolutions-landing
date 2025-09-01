@@ -129,14 +129,6 @@ Cualquier hosting estático que soporte SPA routing.
   "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
 }
 ```
-
-## 📊 Performance
-
-- **Lighthouse Score**: >90 en todas las métricas
-- **First Contentful Paint**: <1.5s
-- **Largest Contentful Paint**: <2.5s
-- **Cumulative Layout Shift**: <0.1
-
 ## 🎯 Características Principales
 
 ### Hero Section
