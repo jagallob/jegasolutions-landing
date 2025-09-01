@@ -33,12 +33,65 @@ const JEGASolutionsLanding = () => {
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (isDesktop && container) {
+      let scrollTimeout;
+      const handleWheel = (e) => {
+        // Prioritize vertical scroll to convert to horizontal.
+        // This avoids conflicts with horizontal trackpad swipes.
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+
+          // Temporarily disable snap for smooth wheel scrolling.
+          // The browser will try to snap to the nearest section after each small scroll
+          // which creates a jerky effect.
+          if (container.style.scrollSnapType !== "none") {
+            container.style.scrollSnapType = "none";
+          }
+
+          container.scrollLeft += e.deltaY;
+
+          // Re-enable snap after a short delay of no scrolling
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            container.style.scrollSnapType = "x mandatory";
+          }, 150);
+        }
+      };
+
+      container.addEventListener("wheel", handleWheel, { passive: false });
+
+      return () => {
+        container.removeEventListener("wheel", handleWheel);
+        if (scrollTimeout) {
+          clearTimeout(scrollTimeout);
+        }
+      };
+    }
+  }, [isDesktop]);
+
   const scrollToSection = useCallback(
     (index) => {
-      const options = isDesktop
-        ? { behavior: "smooth", block: "nearest", inline: "start" }
-        : { behavior: "smooth", block: "start" };
-      sectionRefs.current[index]?.scrollIntoView(options);
+      const section = sectionRefs.current[index];
+      if (!section) return;
+
+      if (isDesktop) {
+        const container = containerRef.current;
+        if (container) {
+          // Use scrollTo for more reliable horizontal scrolling
+          container.scrollTo({
+            left: section.offsetLeft,
+            behavior: "smooth",
+          });
+        }
+      } else {
+        // Fallback for mobile
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     },
     [isDesktop]
   );
@@ -92,6 +145,8 @@ const JEGASolutionsLanding = () => {
       <div
         ref={containerRef}
         className="flex flex-col sm:flex-row sm:h-full sm:w-full sm:overflow-x-scroll sm:snap-x sm:snap-mandatory"
+        // This is important to make wheel scroll immediate, while button clicks can be smooth.
+        style={{ scrollBehavior: isDesktop ? "auto" : "smooth" }}
       >
         {sections.map((Section, index) => (
           <div
