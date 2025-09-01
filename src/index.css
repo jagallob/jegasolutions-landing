@@ -14,7 +14,7 @@
     min-height: 100vh;
 
     /* Desktop: lock to screen height and hide vertical scroll for horizontal layout */
-    @apply sm:h-screen sm:overflow-hidden;
+    @apply lg:h-screen lg:overflow-hidden;
     margin: 0;
     padding: 0;
   }
@@ -48,10 +48,10 @@
     @apply border-2 border-jega-blue-900 text-jega-blue-800 font-semibold rounded-xl px-6 py-2 transition-all duration-300 transform hover:bg-jega-blue-600 hover:text-white hover:scale-105 active:scale-95;
   }
   .section-padding {
-    @apply flex h-full w-full items-center justify-center overflow-hidden p-4 sm:p-6 lg:p-8;
+    @apply flex h-full w-full items-center justify-center overflow-x-hidden p-4 sm:p-6 lg:p-8;
   }
   .section-with-header {
-    @apply flex h-full w-full items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8;
+    @apply flex h-full w-full items-center justify-center overflow-x-hidden px-4 lg:px-8;
     /* Altura del header es h-32 = 8rem, añadimos padding superior */
     padding-top: var(--header-height);
     padding-bottom: 2rem;

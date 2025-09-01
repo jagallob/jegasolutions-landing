@@ -25,7 +25,7 @@ const JEGASolutionsLanding = () => {
   const sectionRefs = useRef([]);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 640px)");
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
     setIsDesktop(mediaQuery.matches);
 
     const handleResize = () => setIsDesktop(mediaQuery.matches);
@@ -138,13 +138,13 @@ const JEGASolutionsLanding = () => {
   }, [isDesktop]);
 
   return (
-    <div className="w-screen bg-gray-50 m-0 p-0 sm:h-screen sm:overflow-hidden">
+    <div className="w-screen bg-gray-50 m-0 p-0 lg:h-screen lg:overflow-hidden">
       {/* Header Component */}
       <Header activeSection={activeSection} scrollToSection={scrollToSection} />
 
       <div
         ref={containerRef}
-        className="flex flex-col sm:flex-row sm:h-full sm:w-full sm:overflow-x-scroll sm:snap-x sm:snap-mandatory"
+        className="flex flex-col lg:flex-row lg:h-full lg:w-full lg:overflow-x-scroll lg:snap-x lg:snap-mandatory"
         // This is important to make wheel scroll immediate, while button clicks can be smooth.
         style={{ scrollBehavior: isDesktop ? "auto" : "smooth" }}
       >
@@ -152,7 +152,7 @@ const JEGASolutionsLanding = () => {
           <div
             key={Section.id}
             ref={(el) => (sectionRefs.current[index] = el)}
-            className="w-full flex-shrink-0 sm:h-screen sm:min-h-screen sm:snap-start sm:overflow-hidden"
+            className="w-full flex-shrink-0 lg:h-screen lg:min-h-screen lg:snap-start lg:overflow-y-auto"
           >
             <Section.component
               onContactClick={() => scrollToSection(4)}
@@ -173,7 +173,7 @@ const JEGASolutionsLanding = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
-          className="fixed left-4 top-1/2 transform -translate-y-1/2 z-40 bg-white/80 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 hidden sm:flex"
+          className="fixed left-4 top-1/2 transform -translate-y-1/2 z-40 bg-white/80 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 hidden lg:flex"
         >
           <ChevronLeft className="w-6 h-6 text-gray-700" />
         </motion.button>
@@ -184,13 +184,13 @@ const JEGASolutionsLanding = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 20 }}
-          className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 bg-white/80 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 hidden sm:flex"
+          className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 bg-white/80 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 hidden lg:flex"
         >
           <ChevronRight className="w-6 h-6 text-gray-700" />
         </motion.button>
       )}
 
-      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-40 space-y-2 hidden sm:block">
+      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-40 space-y-2 hidden lg:block">
         {sections.map((section, index) => (
           <button
             key={section.id}
