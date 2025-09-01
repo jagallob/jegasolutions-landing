@@ -24,10 +24,10 @@ const Header = ({ activeSection, scrollToSection }) => {
         transition={{ duration: 0.6 }}
         className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-lg z-50 h-18 shadow-md"
       >
-        <div className="container-max h-full flex justify-between items-center px-4 sm:px-6 lg:px-8">
+        <div className="container-max h-full flex lg:grid lg:grid-cols-3 justify-between items-center px-4 sm:px-6 lg:px-8">
           {/* Izquierda: logo */}
           <div
-            className="cursor-pointer flex items-center"
+            className="cursor-pointer flex items-center justify-start"
             onClick={() => scrollToSection(0)}
           >
             <img
@@ -38,7 +38,7 @@ const Header = ({ activeSection, scrollToSection }) => {
           </div>
 
           {/* Centro: Navegación */}
-          <div className="hidden lg:flex space-x-8">
+          <div className="hidden lg:flex justify-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.label}
@@ -54,28 +54,28 @@ const Header = ({ activeSection, scrollToSection }) => {
             ))}
           </div>
 
-          {/* Derecha: Botón CTA */}
-          <div className="hidden lg:flex">
-            <button
-              onClick={() => scrollToSection(3)}
-              className="btn-primary px-6 py-3 text-sm"
-            >
-              Ver Precios
-            </button>
-          </div>
-
-          {/* Botón de Menú Móvil */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-jega-blue-500"
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+          {/* Derecha: Botón CTA y Menú Móvil */}
+          <div className="flex items-center justify-end">
+            <div className="hidden lg:flex">
+              <button
+                onClick={() => scrollToSection(3)}
+                className="btn-primary px-6 py-3 text-sm"
+              >
+                Ver Precios
+              </button>
+            </div>
+            <div className="lg:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-jega-blue-500"
+              >
+                {isMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
