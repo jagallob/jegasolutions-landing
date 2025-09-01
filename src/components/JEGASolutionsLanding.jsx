@@ -1,7 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
 import Header from "./Header";
 import Hero from "./Hero";
 import ModulesSection from "./modules/ModulesSection";
@@ -21,48 +20,42 @@ const sections = [
 
 const JEGASolutionsLanding = () => {
   const [activeSection, setActiveSection] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(true);
   const containerRef = useRef(null);
   const sectionRefs = useRef([]);
 
-  // Set body background and prevent vertical scroll
   useEffect(() => {
-    // Set body background to transparent or same as sections
-    document.body.style.background = "#f9fafb"; // gray-50 to match most sections
-    document.documentElement.style.background = "#f9fafb";
-    document.body.style.margin = "0";
-    document.body.style.padding = "0";
-    document.body.style.height = "100vh";
-    document.body.style.overflow = "hidden";
+    const mediaQuery = window.matchMedia("(min-width: 640px)");
+    setIsDesktop(mediaQuery.matches);
 
-    return () => {
-      document.body.style.background = "";
-      document.documentElement.style.background = "";
-      document.body.style.margin = "";
-      document.body.style.padding = "";
-      document.body.style.height = "";
-      document.body.style.overflow = "";
-    };
+    const handleResize = () => setIsDesktop(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
 
-  const scrollToSection = (index) => {
-    sectionRefs.current[index]?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "start",
-    });
-  };
+  const scrollToSection = useCallback(
+    (index) => {
+      const options = isDesktop
+        ? { behavior: "smooth", block: "nearest", inline: "start" }
+        : { behavior: "smooth", block: "start" };
+      sectionRefs.current[index]?.scrollIntoView(options);
+    },
+    [isDesktop]
+  );
 
   const nextSection = () => {
-    const nextIndex = (activeSection + 1) % sections.length;
+    const nextIndex = Math.min(activeSection + 1, sections.length - 1);
     scrollToSection(nextIndex);
   };
 
   const prevSection = () => {
-    const prevIndex = (activeSection - 1 + sections.length) % sections.length;
+    const prevIndex = Math.max(activeSection - 1, 0);
     scrollToSection(prevIndex);
   };
 
   useEffect(() => {
+    // Don't run observer if refs are not ready
+    if (!sectionRefs.current.length) return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -76,7 +69,7 @@ const JEGASolutionsLanding = () => {
           }
         });
       },
-      { threshold: 0.6, root: containerRef.current }
+      { threshold: 0.6, root: isDesktop ? containerRef.current : null }
     );
 
     sectionRefs.current.forEach((ref) => {
@@ -87,55 +80,62 @@ const JEGASolutionsLanding = () => {
       sectionRefs.current.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
+      observer.disconnect();
     };
-  }, []);
+  }, [isDesktop]);
 
   return (
-    <div className="h-screen w-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-800 overflow-hidden m-0 p-0">
+    <div className="w-screen bg-gray-50 m-0 p-0 sm:h-screen sm:overflow-hidden">
       {/* Header Component */}
       <Header activeSection={activeSection} scrollToSection={scrollToSection} />
 
       <div
         ref={containerRef}
-        className="flex h-full w-full overflow-x-scroll snap-x snap-mandatory"
+        className="flex flex-col sm:flex-row sm:h-full sm:w-full sm:overflow-x-scroll sm:snap-x sm:snap-mandatory"
       >
         {sections.map((Section, index) => (
           <div
             key={Section.id}
             ref={(el) => (sectionRefs.current[index] = el)}
-            className="w-full h-screen min-h-screen flex-shrink-0 snap-start overflow-hidden"
+            className="w-full flex-shrink-0 sm:h-screen sm:min-h-screen sm:snap-start sm:overflow-hidden"
           >
             <Section.component
               onContactClick={() => scrollToSection(4)}
               onDemoClick={() => scrollToSection(3)}
-              onScrollToTop={() => scrollToSection(0)}
+              onScrollToTop={() =>
+                isDesktop
+                  ? scrollToSection(0)
+                  : window.scrollTo({ top: 0, behavior: "smooth" })
+              }
             />
           </div>
         ))}
       </div>
 
-      {activeSection > 0 && (
+      {isDesktop && activeSection > 0 && (
         <motion.button
           onClick={prevSection}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="fixed left-4 top-1/2 transform -translate-y-1/2 z-40 bg-white/80 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110"
+          exit={{ opacity: 0, x: -20 }}
+          className="fixed left-4 top-1/2 transform -translate-y-1/2 z-40 bg-white/80 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 hidden sm:flex"
         >
           <ChevronLeft className="w-6 h-6 text-gray-700" />
         </motion.button>
       )}
-      {activeSection < sections.length - 1 && (
+      {isDesktop && activeSection < sections.length - 1 && (
         <motion.button
           onClick={nextSection}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 bg-white/80 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110"
+          exit={{ opacity: 0, x: 20 }}
+          className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 bg-white/80 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 hidden sm:flex"
         >
           <ChevronRight className="w-6 h-6 text-gray-700" />
         </motion.button>
       )}
 
-      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-40 space-y-2 hidden md:block">
+      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-40 space-y-2 hidden sm:block">
         {sections.map((section, index) => (
           <button
             key={section.id}
