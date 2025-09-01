@@ -5,7 +5,7 @@ import {
   Phone,
   MapPin,
   Linkedin,
-  Twitter,
+  X,
   Github,
 } from "lucide-react";
 
@@ -29,7 +29,7 @@ const footerLinks = {
 
 const socialLinks = [
   { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: X, href: "#", label: "X" },
   { icon: Github, href: "#", label: "GitHub" },
 ];
 
@@ -39,25 +39,20 @@ const Footer = ({ onScrollToTop }) => {
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-black text-gray-400 relative section-padding">
       <div className="container-max">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <div className="lg:col-span-1">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 mb-12">
+          <div className="lg:col-span-1 lg:pr-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="flex items-center space-x-3 mb-6"
+              className="-mt-4 mb-2"
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-jega-gold-400 to-jega-gold-500 rounded-xl flex items-center justify-center">
-                <img
-                  src="/logo.png"
-                  alt="JEGASolutions logo"
-                  className="w-7 h-7 object-contain"
-                />
-              </div>
-              <span className="text-2xl font-bold text-white">
-                JEGASolutions
-              </span>
+              <img
+                src="/logo6.png"
+                alt="JEGASolutions logo"
+                className="h-16 object-contain"
+              />
             </motion.div>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -78,6 +73,7 @@ const Footer = ({ onScrollToTop }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
               viewport={{ once: true }}
+              className="lg:px-2"
             >
               <h4 className="text-base text-white font-bold mb-4 capitalize">
                 {title}
