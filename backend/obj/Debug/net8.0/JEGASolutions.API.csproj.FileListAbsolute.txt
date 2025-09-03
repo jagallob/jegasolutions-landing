@@ -1,0 +1,9 @@
+C:\Users\jaial\LandingPageJEGASolutions\jegasolutions-landing\backend\obj\Debug\net8.0\JEGASolutions.API.csproj.AssemblyReference.cache
+C:\Users\jaial\LandingPageJEGASolutions\jegasolutions-landing\backend\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\jaial\LandingPageJEGASolutions\jegasolutions-landing\backend\obj\Debug\net8.0\JEGASolutions.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jaial\LandingPageJEGASolutions\jegasolutions-landing\backend\obj\Debug\net8.0\JEGASolutions.API.AssemblyInfoInputs.cache
+C:\Users\jaial\LandingPageJEGASolutions\jegasolutions-landing\backend\obj\Debug\net8.0\JEGASolutions.API.AssemblyInfo.cs
+C:\Users\jaial\LandingPageJEGASolutions\jegasolutions-landing\backend\obj\Debug\net8.0\JEGASolutions.API.csproj.CoreCompileInputs.cache
+C:\Users\jaial\LandingPageJEGASolutions\jegasolutions-landing\backend\obj\Debug\net8.0\JEGASolutions.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\jaial\LandingPageJEGASolutions\jegasolutions-landing\backend\obj\Debug\net8.0\JEGASolutions.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jaial\LandingPageJEGASolutions\jegasolutions-landing\backend\obj\Debug\net8.0\JEGASolutions.API.sourcelink.json

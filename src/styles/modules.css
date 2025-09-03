@@ -1,0 +1,88 @@
+/* Estilos para aislamiento de módulos */
+
+/* Contenedor base para todos los módulos */
+.module-container {
+  @apply w-full h-full;
+  isolation: isolate; /* Crea un nuevo contexto de apilamiento */
+}
+
+/* Módulos con Antd */
+.module-antd {
+  /* Aislar estilos de Antd */
+  .ant-layout,
+  .ant-menu,
+  .ant-button,
+  .ant-input,
+  .ant-table {
+    /* Los estilos de Antd se aplican automáticamente */
+  }
+
+  /* Personalización de colores de Antd */
+  --ant-primary-color: var(--primary-color);
+  --ant-success-color: var(--secondary-color);
+  --ant-warning-color: var(--accent-color);
+}
+
+/* Módulos con Tailwind */
+.module-tailwind {
+  /* Los estilos de Tailwind se aplican automáticamente */
+  /* Variables CSS personalizadas */
+  --tw-primary: var(--primary-color);
+  --tw-secondary: var(--secondary-color);
+  --tw-accent: var(--accent-color);
+}
+
+/* Aislamiento específico por módulo */
+.module-gestorhorasextra {
+  /* Estilos específicos para GestorHorasExtra */
+  .ant-layout-header {
+    background: var(--primary-color);
+  }
+
+  .ant-menu-item-selected {
+    background-color: var(--primary-color);
+  }
+}
+
+.module-reportbuilderproject {
+  /* Estilos específicos para ReportBuilderProject */
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
+
+  .text-primary {
+    color: var(--primary-color);
+  }
+
+  .border-primary {
+    border-color: var(--primary-color);
+  }
+}
+
+/* Prevenir conflictos entre frameworks */
+.module-antd .tailwind-class {
+  /* Resetear estilos de Tailwind en módulos Antd */
+  all: unset;
+}
+
+.module-tailwind .ant-* {
+  /* Resetear estilos de Antd en módulos Tailwind */
+  all: unset;
+}
+
+/* Responsive design para módulos */
+@media (max-width: 768px) {
+  .module-container {
+    @apply p-2;
+  }
+
+  .module-antd .ant-layout-sider {
+    @apply w-0;
+  }
+
+  .module-tailwind .sidebar {
+    @apply hidden;
+  }
+}
+
+
