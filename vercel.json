@@ -15,14 +15,12 @@
       "dest": "/index.html"
     }
   ],
-  "functions": {
-    "src/pages/api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "env": {
     "VITE_WOMPI_PUBLIC_KEY": "@wompi_public_key",
-    "VITE_API_BASE_URL": "@api_base_url"
+    "VITE_API_BASE_URL": "@api_base_url",
+    "VITE_MODULE1_API_URL": "@module1_api_url",
+    "VITE_MODULE2_API_URL": "@module2_api_url",
+    "VITE_WOMPI_API_URL": "@wompi_api_url"
   },
   "headers": [
     {
