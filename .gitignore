@@ -29,3 +29,12 @@ yarn-error.log*
 
 # Archivos de VS Code
 .vscode/
+
+# Archivos generados por CSS Modules
+**/*.css.json
+
+# Archivos generados por CSS Modules
+src/**/*.css.json
+
+# Ignorar carpetas de módulos legacy o de referencia
+/legacy-module-clients/
